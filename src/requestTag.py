@@ -26,19 +26,11 @@ class RequestTag(webapp2.RequestHandler):
 		#self.redirect('images\pix.png')
 			
 	def getBody(self):
-		argumentData = ""
-		for i in self.request.arguments():
-			argumentData += i + ": " + str(self.request.get_all(i)) + '\n'
 		data = """Remote Address: %s
 
 Full URL: %s
 
-Headers: %s
-
-Cookies: %s
-
-Arguments:
-%s""" % (str(self.request.remote_addr), str(self.request.url), str(self.request.headers), str(self.request.cookies), argumentData)
+Headers: %s""" % (str(self.request.remote_addr), str(self.request.url), str(self.request.headers))
 		return data
 		
 

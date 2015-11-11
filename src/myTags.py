@@ -21,6 +21,8 @@ class MyTags(webapp2.RequestHandler):
 				else:
 					tagsWithoutRequest.append(q)
 			
+			self.response.write('<a href="../"> Main </a>')
+			self.response.write('<br>')
 			self.response.write('<h1> Not requested yet </h1> <br>')
 			for i in tagsWithoutRequest:
 				self.response.write('%s <br>' % i.tag)

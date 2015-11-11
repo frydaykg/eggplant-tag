@@ -14,9 +14,9 @@ class TagGenerator(webapp2.RequestHandler):
 			tag.user = user
 			tag.tag = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(32))
 			tag.put()
-			self.response.write('Successfully generated. Tag is %s' % tag.tag)
+			self.response.write(tag.tag)
 		else:
-			self.redirect(users.create_login_url(self.request.uri))
+			self.error(401)
 
 
 app = webapp2.WSGIApplication([

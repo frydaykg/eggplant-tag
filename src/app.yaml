@@ -5,8 +5,8 @@ api_version: 1
 threadsafe: true
 
 handlers:
-- url: /images
-  static_dir: images
+- url: /js
+  static_dir: js
 
 - url: /tag/
   script: tagGenerator.app

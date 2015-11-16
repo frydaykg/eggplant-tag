@@ -11,4 +11,5 @@ class Tag(ndb.Model):
 class Request(ndb.Model):
 	tag = ndb.StructuredProperty(Tag)
 	datetime = ndb.DateTimeProperty(auto_now_add=True)
-	requestData = ndb.StringProperty(indexed=False)
+	remoteAddress = ndb.StringProperty(indexed=False)
+	headers = ndb.StringProperty(indexed=False)

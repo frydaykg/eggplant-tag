@@ -34,7 +34,7 @@ class MyTags(webapp2.RequestHandler):
 				self.response.write('<h3>%s</h3	>' % i[0].tag.tag)
 				self.response.write('<ul>')
 				for j in i:
-					self.response.write('<li>%s <br> %s</li>' % (j.datetime, j.requestData.replace('\n', '<br>')))
+					self.response.write('<li>%s <br> %s <br><br> %s</li>' % (j.datetime, j.remoteAddress, j.headers))
 				self.response.write('</ul>')
 		else:
 			self.redirect(users.create_login_url(self.request.uri))

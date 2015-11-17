@@ -29,7 +29,7 @@ class MyTags(webapp2.RequestHandler):
 				self.response.write('<div id="%s">' % i.tag)
 				self.response.write(i.tag)
 				self.response.write('&nbsp;&nbsp;<a href="#" onclick="deleteTag(\'%s\')">delete</a>' % i.tag)
-				self.response.write('&nbsp;&nbsp;<a href="#" onclick="copyText(window.location.host + \'/request?\' + \'%s\')">copy tag link</a>' % i.tag)
+				self.response.write('&nbsp;&nbsp;<a href="#" onclick="copyText(\'http://\' + window.location.host + \'/request?\' + \'%s\')">copy tag link</a>' % i.tag)
 				self.response.write('<br></div>')
 			
 			self.response.write('<br>')

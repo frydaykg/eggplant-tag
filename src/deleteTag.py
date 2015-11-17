@@ -10,7 +10,7 @@ class DeleteTag(webapp2.RequestHandler):
 	def get(self):
 		cur_user = users.get_current_user()	
 		if cur_user:
-			query = Tag.query(Tag.tag == self.request.query_string)
+			query = Tag.query(Tag.tag == self.request.query_string and Tag.user == cur_user)
 			if query.iter().has_next():
 				tag = query.iter().next()
 				tag.key.delete()

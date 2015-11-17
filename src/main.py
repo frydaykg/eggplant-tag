@@ -15,13 +15,12 @@ class MainPage(webapp2.RequestHandler):
 			self.response.write('<br><br>')
 			
 			self.response.write("""
-<script src="js/tagManager.js"></script>
+<script src="/js/tagManager.js"></script>
+<script src="/js/clipboardCopy.js"></script>
 
-<input type="text" class="js-copytextarea" id="tag" value="" size=45 readonly/>
+<input type="text" id="tag" value="" size=45 readonly/>
 <input type="button" onclick="getTag()" value="Get tag"/>
-<input type="button" class="js-textareacopybtn" value="Copy"/>
-
-<script src="js/clipboardCopy.js"></script>
+<input type="button" value="Copy" onclick="copyValueOfElement(\'tag\')"/>
 """)
 			self.response.write('</body></html>')
 		else:

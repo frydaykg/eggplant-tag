@@ -8,6 +8,8 @@ handlers:
 - url: /js
   static_dir: js
 
+- url: /deleteTag
+  script: deleteTag.app
 - url: /tag/
   script: tagGenerator.app
 - url: /tags/

@@ -20,12 +20,17 @@ class MyTags(webapp2.RequestHandler):
 					tagsWithRequest.append(requests)
 				else:
 					tagsWithoutRequest.append(q)
-			
+			self.response.write('<script src="/js/tagManager.js"></script>')
+			self.response.write('<script src="/js/clipboardCopy.js"></script>')
 			self.response.write('<a href="../"> Main </a>')
 			self.response.write('<br>')
 			self.response.write('<h1> Not requested yet </h1> <br>')
 			for i in tagsWithoutRequest:
-				self.response.write('%s <br>' % i.tag)
+				self.response.write('<div id="%s">' % i.tag)
+				self.response.write(i.tag)
+				self.response.write('&nbsp;&nbsp;<a href="#" onclick="deleteTag(\'%s\')">delete</a>' % i.tag)
+				self.response.write('&nbsp;&nbsp;<a href="#" onclick="copyText(window.location.host + \'/request?\' + \'%s\')">copy tag link</a>' % i.tag)
+				self.response.write('<br></div>')
 			
 			self.response.write('<br>')
 			self.response.write('<h1> Requested </h1> <br>')
@@ -34,7 +39,13 @@ class MyTags(webapp2.RequestHandler):
 				self.response.write('<h3>%s</h3	>' % i[0].tag.tag)
 				self.response.write('<ul>')
 				for j in i:
-					self.response.write('<li>%s <br> %s <br><br> %s</li>' % (j.datetime, j.remoteAddress, j.headers))
+					headers = eval(j.headers)
+					self.response.write('<li>')
+					self.response.write('%s <br>' % j.datetime)
+					self.response.write('<b>Remote address:</b>&nbsp;%s <br><br>' %  j.remoteAddress)
+					for header in headers:
+						self.response.write('<b>%s</b>:&nbsp;%s<br>' % (header, headers[header]))
+					self.response.write('</li><br>')
 				self.response.write('</ul>')
 		else:
 			self.redirect(users.create_login_url(self.request.uri))

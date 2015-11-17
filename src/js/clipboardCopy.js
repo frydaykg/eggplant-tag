@@ -1,13 +1,40 @@
-var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
-copyTextareaBtn.addEventListener('click', function(event) {
-  var copyTextarea = document.querySelector('.js-copytextarea');
+function copyValueOfElement(elementId) {
+  var copyTextarea = document.getElementById(elementId)
   copyTextarea.select();
 	  try {
     var successful = document.execCommand('copy');
     var msg = successful ? 'successful' : 'unsuccessful';
     console.log('Copying text command was ' + msg);
+    deselectAny();
   } catch (err) {
     console.log('Oops, unable to copy');
   }
-});
+}
+
+function copyText(text) {
+  var textArea = document.createElement("textarea");
+  textArea.value = text;
+  document.body.appendChild(textArea);
+  textArea.select();
+	  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Copying text command was ' + msg);
+    deselectAny();
+  } catch (err) {
+    console.log('Oops, unable to copy');
+  }
+  document.body.removeChild(textArea);
+}
+
+function deselectAny() {
+	if (window.getSelection) {
+	  if (window.getSelection().empty) {  // Chrome
+	    window.getSelection().empty();
+	  } else if (window.getSelection().removeAllRanges) {  // Firefox
+	    window.getSelection().removeAllRanges();
+	  }
+	} else if (document.selection) {  // IE?
+	  document.selection.empty();
+	}
+}

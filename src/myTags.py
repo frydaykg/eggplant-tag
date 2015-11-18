@@ -36,7 +36,10 @@ class MyTags(webapp2.RequestHandler):
 			self.response.write('<h1> Requested </h1> <br>')
 			
 			for i in tagsWithRequest:
-				self.response.write('<h3>%s</h3	>' % i[0].tag.tag)
+				self.response.write('<div id="%s">' % i[0].tag.tag)
+				self.response.write('<h3 style="display:inline-block">%s</h3>' % i[0].tag.tag)
+				self.response.write('&nbsp;&nbsp;<a href="#" style="display:inline-block" onclick="deleteTag(\'%s\')">delete</a>' % i[0].tag.tag)
+				self.response.write('&nbsp;&nbsp;<a href="#" style="display:inline-block" onclick="copyText(\'http://\' + window.location.host + \'/request?\' + \'%s\')">copy tag link</a>' % i[0].tag.tag)
 				self.response.write('<ul>')
 				for j in i:
 					headers = eval(j.headers)
@@ -46,7 +49,7 @@ class MyTags(webapp2.RequestHandler):
 					for header in headers:
 						self.response.write('<b>%s</b>:&nbsp;%s<br>' % (header, headers[header]))
 					self.response.write('</li><br>')
-				self.response.write('</ul>')
+				self.response.write('</ul></div>')
 		else:
 			self.redirect(users.create_login_url(self.request.uri))
 

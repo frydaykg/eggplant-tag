@@ -20,7 +20,7 @@ class MainPage(webapp2.RequestHandler):
 
 <input type="text" id="tag" value="" size=45 readonly/>
 <input type="button" onclick="getTag()" value="Get tag"/>
-<input type="button" value="Copy" onclick="copyValueOfElement(\'tag\')"/>
+<input type="button" value="Copy" onclick="copyValueOfElement(\'tag\', getTagLink)"/>
 """)
 			self.response.write('</body></html>')
 		else:

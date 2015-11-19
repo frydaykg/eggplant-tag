@@ -1,3 +1,7 @@
+function getTagLink(tag) {
+	return 'http://' + window.location.host + '/request?' + tag;
+};
+
 function getTag() {
 	try {
 	  var xhttp = new XMLHttpRequest();

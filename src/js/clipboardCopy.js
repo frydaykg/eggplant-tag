@@ -1,13 +1,10 @@
-function copyValueOfElement(elementId) {
+function copyValueOfElement(elementId, handleFunction) {
   var copyTextarea = document.getElementById(elementId)
-  copyTextarea.select();
-	  try {
-    var successful = document.execCommand('copy');
-    var msg = successful ? 'successful' : 'unsuccessful';
-    console.log('Copying text command was ' + msg);
-    deselectAny();
-  } catch (err) {
-    console.log('Oops, unable to copy');
+  if (copyTextarea) {
+  	if (handleFunction)
+      copyText(handleFunction(copyTextarea.value));
+    else
+      copyText(copyTextarea.value)
   }
 }
 

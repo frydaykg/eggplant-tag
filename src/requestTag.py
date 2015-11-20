@@ -6,6 +6,9 @@ import random
 from google.appengine.api import images
 from models import *
 
+simpleImageData = '\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x01\x03\x00\x00\x00%\xdbV\xca\x00\x00\x00\x03PLTE\x00\x00\x00\xa7z=\xda\x00\x00\x00\x01tRNS\x00@\xe6\xd8f\x00\x00\x00\nIDAT\x08\xd7c`\x00\x00\x00\x02\x00\x01\xe2!\xbc3\x00\x00\x00\x00IEND\xaeB`\x82'
+
+
 class RequestTag(webapp2.RequestHandler):
 	def get(self):
 		query = Tag.query(Tag.tag == self.request.query_string)
@@ -16,10 +19,8 @@ class RequestTag(webapp2.RequestHandler):
 			request.headers = str(self.request.headers)
 			request.remoteAddress = str(self.request.remote_addr)
 			request.put()
-		data = "89 50 4E 47 0D 0A 1A 0A 00 00 00 0D 49 48 44 52 00 00 00 01 00 00 00 01 01 03 00 00 00 25 DB 56 CA 00 00 00 03 50 4C 54 45 00 00 00 A7 7A 3D DA 00 00 00 01 74 52 4E 53 00 40 E6 D8 66 00 00 00 0A 49 44 41 54 08 D7 63 60 00 00 00 02 00 01 E2 21 BC 33 00 00 00 00 49 45 4E 44 AE 42 60 82"
-		data = [int(i,16) for i in data.split(' ')]
-		data = ''.join([chr(i) for i in data])
-		self.response.write(data)
+
+		self.response.write(simpleImageData)
 		self.response.headers[ 'Content-Type' ] = 'image/png'
 		self.response.headers[ 'Cache-Control' ] = 'no-cache, no-store, must-revalidate'
 		self.response.headers[ 'Pragma' ] = 'no-cache'

@@ -8,6 +8,8 @@ handlers:
 - url: /js
   static_dir: js
 
+- url: /deleteRequest
+  script: deleteRequest.app
 - url: /deleteTag
   script: deleteTag.app
 - url: /tag/

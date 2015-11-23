@@ -33,3 +33,19 @@ function deleteTag(tag) {
 	  alert("Oops, something goes wrong. Try again.");
 	}
 };
+
+function deleteRequest(request) {
+	try {
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.open("GET", "/deleteRequest?" + request, true);
+	  xhttp.onreadystatechange = function() {
+		  if (xhttp.readyState == 4 && xhttp.status == 200) {
+		      document.getElementById(request).style.display = 'none';
+		  }
+      }
+	  xhttp.send();
+	}
+	catch (E) {
+	  alert("Oops, something goes wrong. Try again.");
+	}
+};

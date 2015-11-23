@@ -44,12 +44,13 @@ class MyTags(webapp2.RequestHandler):
 				for j in i:
 					headers = eval(j.headers)
 					keys = sorted(headers.keys())
-					self.response.write('<li>')
-					self.response.write('%s <br>' % j.datetime)
+					self.response.write('<li id=\'%s\'>' % j.key.id())
+					self.response.write('%s' % j.datetime)
+					self.response.write('&nbsp;&nbsp;<a href="#" onclick="deleteRequest(\'%s\')">delete</a><br>' % j.key.id())
 					self.response.write('<b>Remote address:</b>&nbsp;%s <br><br>' %  j.remoteAddress)
 					for key in keys:
 						self.response.write('<b>%s</b>:&nbsp;%s<br>' % (key, headers[key]))
-					self.response.write('</li><br>')
+					self.response.write('<br></li>')
 				self.response.write('</ul></div>')
 		else:
 			self.redirect(users.create_login_url(self.request.uri))

@@ -1,0 +1,45 @@
+<html>
+{% autoescape true %}
+  <head>
+    <title>Main</title>
+  </head>
+  <body>
+    <script src="/js/tagManager.js"></script>
+    <script src="/js/clipboardCopy.js"></script>
+	<a href="/">Main</a><br>
+	<h1> Not requested yet </h1>
+	{% for tagWithoutRequest in tagsWithoutRequest %}
+		<div id="{{ tagWithoutRequest.tag }}">
+		  {{ tagWithoutRequest.tag }}
+		  &nbsp;&nbsp;<a href="#" onclick="deleteTag('{{ tagWithoutRequest.tag }}')">delete</a>
+		  &nbsp;&nbsp;<a href="#" onclick="copyText(getTagLink('{{ tagWithoutRequest.tag }}'))">copy tag link</a>
+		  <br>
+		</div>
+    {% endfor %}
+    
+    <br>
+    <h1>Requested</h1>
+    {% for tagWithRequest in tagsWithRequest %}
+      <div id="{{ tagWithRequest[0].tag }}">
+	    <h3 style="display:inline-block">{{ tagWithRequest[0].tag }}</h3>
+		&nbsp;&nbsp;<a href="#" style="display:inline-block" onclick="deleteTag('{{ tagWithRequest[0].tag }}')">delete</a>
+		&nbsp;&nbsp;<a href="#" style="display:inline-block" onclick="copyText(getTagLink('{{ tagWithRequest[0].tag }}'))">copy tag link</a>
+		<ul>
+		  {% for request in tagWithRequest %}
+		    <li id='{{ request.id }}'>
+		    {{ request.datetime }}
+		    &nbsp;&nbsp;<a href="#" onclick="deleteRequest('{{ request.id }}')">delete</a><br>
+			
+			<b>Remote address:</b>&nbsp;{{ request.remoteAddress }} <br><br>
+			{% for header in request.headers %}
+			  <b>{{ header[0] }}</b>:&nbsp;{{ header[1] }}<br>
+			{% endfor %}
+			<br></li>
+		  {% endfor %}
+		</ul>
+	  <div>
+	{% endfor %}
+    
+  </body>
+  {% endautoescape %}
+</html>

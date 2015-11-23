@@ -5,6 +5,23 @@ from google.appengine.ext import ndb
 import random
 from google.appengine.api import users
 from models import *
+import jinja2
+import os
+
+JINJA_ENVIRONMENT = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    extensions=['jinja2.ext.autoescape'],
+    autoescape=True)
+
+class TemplateRequest:
+	def __init__(self, request):
+		self.id = request.key.id()
+		self.tag = request.tag.tag
+		self.datetime = request.datetime
+		self.remoteAddress = request.remoteAddress
+		dic = eval(request.headers)
+		keys = sorted(dic.keys())
+		self.headers = [(x, dic[x]) for x in keys]
 
 class MyTags(webapp2.RequestHandler):
 	def get(self):
@@ -17,41 +34,17 @@ class MyTags(webapp2.RequestHandler):
 				requestQuery = Request.query(Request.tag == q)
 				requests = list(requestQuery.iter())
 				if requests:
-					tagsWithRequest.append(requests)
+					templateRequests = [TemplateRequest(x) for x  in requests]
+					tagsWithRequest.append(templateRequests)
 				else:
 					tagsWithoutRequest.append(q)
-			self.response.write('<script src="/js/tagManager.js"></script>')
-			self.response.write('<script src="/js/clipboardCopy.js"></script>')
-			self.response.write('<a href="../"> Main </a>')
-			self.response.write('<br>')
-			self.response.write('<h1> Not requested yet </h1> <br>')
-			for i in tagsWithoutRequest:
-				self.response.write('<div id="%s">' % i.tag)
-				self.response.write(i.tag)
-				self.response.write('&nbsp;&nbsp;<a href="#" onclick="deleteTag(\'%s\')">delete</a>' % i.tag)
-				self.response.write('&nbsp;&nbsp;<a href="#" onclick="copyText(getTagLink(\'%s\'))">copy tag link</a>' % i.tag)
-				self.response.write('<br></div>')
 			
-			self.response.write('<br>')
-			self.response.write('<h1> Requested </h1> <br>')
-			
-			for i in tagsWithRequest:
-				self.response.write('<div id="%s">' % i[0].tag.tag)
-				self.response.write('<h3 style="display:inline-block">%s</h3>' % i[0].tag.tag)
-				self.response.write('&nbsp;&nbsp;<a href="#" style="display:inline-block" onclick="deleteTag(\'%s\')">delete</a>' % i[0].tag.tag)
-				self.response.write('&nbsp;&nbsp;<a href="#" style="display:inline-block" onclick="copyText(getTagLink(\'%s\'))">copy tag link</a>' % i[0].tag.tag)
-				self.response.write('<ul>')
-				for j in i:
-					headers = eval(j.headers)
-					keys = sorted(headers.keys())
-					self.response.write('<li id=\'%s\'>' % j.key.id())
-					self.response.write('%s' % j.datetime)
-					self.response.write('&nbsp;&nbsp;<a href="#" onclick="deleteRequest(\'%s\')">delete</a><br>' % j.key.id())
-					self.response.write('<b>Remote address:</b>&nbsp;%s <br><br>' %  j.remoteAddress)
-					for key in keys:
-						self.response.write('<b>%s</b>:&nbsp;%s<br>' % (key, headers[key]))
-					self.response.write('<br></li>')
-				self.response.write('</ul></div>')
+			template_values = {
+            'tagsWithoutRequest': tagsWithoutRequest,
+            'tagsWithRequest': tagsWithRequest,
+            }
+			template = JINJA_ENVIRONMENT.get_template('myTags.html')
+			self.response.write(template.render(template_values))
 		else:
 			self.redirect(users.create_login_url(self.request.uri))
 

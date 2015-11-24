@@ -5,24 +5,20 @@ from google.appengine.ext import ndb
 import random
 from google.appengine.api import users
 import models
+import jinja2
+import os
 
+JINJA_ENVIRONMENT = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    extensions=['jinja2.ext.autoescape'],
+    autoescape=True)
+    
 class MainPage(webapp2.RequestHandler):
 	def get(self):
 		user = users.get_current_user()
 		if user:
-			self.response.write('<html><body>')
-			self.response.write('<a href="tags/"> My tags </a>')
-			self.response.write('<br><br>')
-			
-			self.response.write("""
-<script src="/js/tagManager.js"></script>
-<script src="/js/clipboardCopy.js"></script>
-
-<input type="text" id="tag" value="" size=45 readonly/>
-<input type="button" onclick="getTag()" value="Get tag"/>
-<input type="button" value="Copy" onclick="copyValueOfElement(\'tag\', getTagLink)"/>
-""")
-			self.response.write('</body></html>')
+			template = JINJA_ENVIRONMENT.get_template('main.html')
+			self.response.write(template.render())
 		else:
 			self.redirect(users.create_login_url(self.request.uri))
 

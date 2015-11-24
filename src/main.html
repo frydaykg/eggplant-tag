@@ -1,0 +1,16 @@
+<html>
+  <head>
+  <title>Generate tag</title>
+  </head>
+  <body>
+    <a href="tags/"> My tags </a>
+    <br><br>
+			
+    <script src="/js/tagManager.js"></script>
+    <script src="/js/clipboardCopy.js"></script>
+
+    <input type="text" id="tag" value="" size=45 readonly/>
+    <input type="button" onclick="getTag()" value="Get tag"/>
+    <input type="button" value="Copy" onclick="copyValueOfElement(\'tag\', getTagLink)"/>
+  </body>
+</html>

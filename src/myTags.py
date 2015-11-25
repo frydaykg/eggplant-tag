@@ -34,7 +34,7 @@ class MyTags(webapp2.RequestHandler):
 				requestQuery = Request.query(Request.tag == q)
 				requests = list(requestQuery.iter())
 				if requests:
-					templateRequests = [TemplateRequest(x) for x  in requests]
+					templateRequests = sorted([TemplateRequest(x) for x  in requests], key = lambda x: x.datetime)
 					tagsWithRequest.append(templateRequests)
 				else:
 					tagsWithoutRequest.append(q)

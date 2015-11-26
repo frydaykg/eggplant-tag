@@ -45,6 +45,7 @@ class MyTags(webapp2.RequestHandler):
             }
 			template = JINJA_ENVIRONMENT.get_template('myTags.html')
 			self.response.write(template.render(template_values))
+			self.response.write(JINJA_ENVIRONMENT.get_template('footer.html').render())
 		else:
 			self.redirect(users.create_login_url(self.request.uri))
 

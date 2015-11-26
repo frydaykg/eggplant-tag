@@ -19,6 +19,7 @@ class MainPage(webapp2.RequestHandler):
 		if user:
 			template = JINJA_ENVIRONMENT.get_template('main.html')
 			self.response.write(template.render())
+			self.response.write(JINJA_ENVIRONMENT.get_template('footer.html').render())
 		else:
 			self.redirect(users.create_login_url(self.request.uri))
 

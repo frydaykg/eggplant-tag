@@ -1,14 +1,4 @@
-<html>
-{% autoescape true %}
-  <head>
-    <title>My tags</title>
-  </head>
-  <body>
-    <div style="min-height:100%; position:relative;">
-    <div style="padding-bottom:40px">
-    <script src="/js/tagManager.js"></script>
-    <script src="/js/clipboardCopy.js"></script>
-	<a href="/">Main</a><br>
+	{% autoescape true %}
 	<h1> Not requested yet </h1>
 	{% for tagWithoutRequest in tagsWithoutRequest %}
 		<div id="{{ tagWithoutRequest.tag }}">
@@ -40,6 +30,5 @@
 		  {% endfor %}
 		</ul>
 	  <div>
-	</div>
 	{% endfor %}
-    {% endautoescape %}
+	{% endautoescape %}

@@ -17,8 +17,8 @@ class MainPage(webapp2.RequestHandler):
 	def get(self):
 		user = users.get_current_user()
 		if user:
-			template = JINJA_ENVIRONMENT.get_template('main.html')
-			self.response.write(template.render())
+			self.response.write(JINJA_ENVIRONMENT.get_template('header.html').render({'title': 'Generate tag'}))
+			self.response.write(JINJA_ENVIRONMENT.get_template('main.html').render())
 			self.response.write(JINJA_ENVIRONMENT.get_template('footer.html').render())
 		else:
 			self.redirect(users.create_login_url(self.request.uri))

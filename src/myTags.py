@@ -43,10 +43,10 @@ class MyTags(webapp2.RequestHandler):
             'tagsWithoutRequest': tagsWithoutRequest,
             'tagsWithRequest': tagsWithRequest,
             }
-			self.response.write(JINJA_ENVIRONMENT.get_template('header.html').render({'title': 'My tags'}))
-			template = JINJA_ENVIRONMENT.get_template('myTags.html')
+			self.response.write(JINJA_ENVIRONMENT.get_template('templates/header.html').render({'title': 'My tags'}))
+			template = JINJA_ENVIRONMENT.get_template('templates/myTags.html')
 			self.response.write(template.render(template_values))
-			self.response.write(JINJA_ENVIRONMENT.get_template('footer.html').render())
+			self.response.write(JINJA_ENVIRONMENT.get_template('templates/footer.html').render())
 		else:
 			self.redirect(users.create_login_url(self.request.uri))
 

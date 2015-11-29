@@ -13,3 +13,4 @@ class Request(ndb.Model):
 	datetime = ndb.DateTimeProperty(auto_now_add=True)
 	remoteAddress = ndb.StringProperty(indexed=False)
 	headers = ndb.StringProperty(indexed=False)
+	country = ndb.StringProperty(indexed=False)

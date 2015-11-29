@@ -19,6 +19,7 @@ class TemplateRequest:
 		self.tag = request.tag.tag
 		self.datetime = request.datetime
 		self.remoteAddress = request.remoteAddress
+		self.country = request.country
 		dic = eval(request.headers)
 		keys = sorted(dic.keys())
 		self.headers = [(x, dic[x]) for x in keys]

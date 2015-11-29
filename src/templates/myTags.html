@@ -22,7 +22,9 @@
 		    {{ request.datetime }}
 		    &nbsp;&nbsp;<a href="#" onclick="deleteRequest('{{ request.id }}')">delete</a><br>
 			
-			<b>Remote address:</b>&nbsp;{{ request.remoteAddress }} <br><br>
+			<b>Remote address:</b>&nbsp;{{ request.remoteAddress }} <br>
+			<b>Country:</b>&nbsp;{{ request.country }} <br><br>
+			
 			{% for header in request.headers %}
 			  <b>{{ header[0] }}</b>:&nbsp;{{ header[1] }}<br>
 			{% endfor %}

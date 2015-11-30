@@ -14,3 +14,4 @@ class Request(ndb.Model):
 	remoteAddress = ndb.StringProperty(indexed=False)
 	headers = ndb.StringProperty(indexed=False)
 	country = ndb.StringProperty(indexed=False)
+	region = ndb.StringProperty(indexed=False)

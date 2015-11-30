@@ -6,6 +6,7 @@ import random
 from google.appengine.api import images
 from models import *
 from mappers.countryMap import getCountryNameByCode
+from mappers.regionMap import getRegionNameByCode
 
 simpleImageData = '\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x01\x03\x00\x00\x00%\xdbV\xca\x00\x00\x00\x03PLTE\x00\x00\x00\xa7z=\xda\x00\x00\x00\x01tRNS\x00@\xe6\xd8f\x00\x00\x00\nIDAT\x08\xd7c`\x00\x00\x00\x02\x00\x01\xe2!\xbc3\x00\x00\x00\x00IEND\xaeB`\x82'
 
@@ -21,6 +22,8 @@ class RequestTag(webapp2.RequestHandler):
 			request.remoteAddress = str(self.request.remote_addr)
 			if 'X-Appengine-Country' in self.request.headers:
 			  request.country = getCountryNameByCode(self.request.headers['X-Appengine-Country'])
+			  if 'X-Appengine-Region' in self.request.headers:
+			  	  request.region = getRegionNameByCode(self.request.headers['X-Appengine-Country'], self.request.headers['X-Appengine-Region'])
 			request.put()
 
 		self.response.write(simpleImageData)

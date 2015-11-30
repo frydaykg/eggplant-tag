@@ -18,12 +18,13 @@
 		&nbsp;&nbsp;<a href="#" style="display:inline-block" onclick="copyText(getTagLink('{{ tagWithRequest[0].tag }}'))">copy tag link</a>
 		<ul>
 		  {% for request in tagWithRequest %}
-		    <li id='{{ request.id }}'>
+		    <li id='{{ request.id }}'>	
 		    {{ request.datetime }}
 		    &nbsp;&nbsp;<a href="#" onclick="deleteRequest('{{ request.id }}')">delete</a><br>
 			
 			<b>Remote address:</b>&nbsp;{{ request.remoteAddress }} <br>
-			<b>Country:</b>&nbsp;{{ request.country }} <br><br>
+			<b>Country:</b>&nbsp;{{ request.country }} <br>
+			<b>Region:</b>&nbsp;{{ request.region }} <br><br>
 			
 			{% for header in request.headers %}
 			  <b>{{ header[0] }}</b>:&nbsp;{{ header[1] }}<br>
@@ -31,6 +32,6 @@
 			<br></li>
 		  {% endfor %}
 		</ul>
-	  <div>
+	  </div>
 	{% endfor %}
 	{% endautoescape %}

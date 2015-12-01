@@ -21,9 +21,11 @@ class RequestTag(webapp2.RequestHandler):
 			request.headers = str(self.request.headers)
 			request.remoteAddress = str(self.request.remote_addr)
 			if 'X-Appengine-Country' in self.request.headers:
-			  request.country = getCountryNameByCode(self.request.headers['X-Appengine-Country'])
+			  request.country = getCountryNameByCode(self.request.headers['X-Appengine-Country']).title()
 			  if 'X-Appengine-Region' in self.request.headers:
-			  	  request.region = getRegionNameByCode(self.request.headers['X-Appengine-Country'], self.request.headers['X-Appengine-Region'])
+			    request.region = getRegionNameByCode(self.request.headers['X-Appengine-Country'], self.request.headers['X-Appengine-Region']).title()
+			if 'X-Appengine-City' in self.request.headers:
+			  request.city = str(self.request.headers['X-Appengine-City']).title()
 			request.put()
 
 		self.response.write(simpleImageData)

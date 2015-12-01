@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*- 
 #based on http://www.iso.org/iso/home/standards/country_codes/country_names_and_code_elements_txt-temp.htm
 _dic = {"AF": "AFGHANISTAN",
-"AX": u"ALAND ISLANDS",
+"AX": "ÅLAND ISLANDS",
 "AL": "ALBANIA",
 "DZ": "ALGERIA",
 "AS": "AMERICAN SAMOA",
@@ -53,10 +54,10 @@ _dic = {"AF": "AFGHANISTAN",
 "CD": "CONGO, THE DEMOCRATIC REPUBLIC OF THE",
 "CK": "COOK ISLANDS",
 "CR": "COSTA RICA",
-"CI": u"COTE D'IVOIRE",
+"CI": "CÔTE D'IVOIRE",
 "HR": "CROATIA",
 "CU": "CUBA",
-"CW": u"CURACAO",
+"CW": "CURAÇAO",
 "CY": "CYPRUS",
 "CZ": "CZECH REPUBLIC",
 "DK": "DENMARK",
@@ -179,11 +180,11 @@ _dic = {"AF": "AFGHANISTAN",
 "PT": "PORTUGAL",
 "PR": "PUERTO RICO",
 "QA": "QATAR",
-"RE": u"REUNION",
+"RE": "RÉUNION",
 "RO": "ROMANIA",
 "RU": "RUSSIAN FEDERATION",
 "RW": "RWANDA",
-"BL": "SAINT BARTHELEMY",
+"BL": "SAINT BARTHÉLEMY",
 "SH": "SAINT HELENA, ASCENSION AND TRISTAN DA CUNHA",
 "KN": "SAINT KITTS AND NEVIS",
 "LC": "SAINT LUCIA",
@@ -254,4 +255,4 @@ def getCountryNameByCode(code):
   if code in _dic:
     return _dic[code.upper()]
   else:
-    return "Not in list"
+    return ""

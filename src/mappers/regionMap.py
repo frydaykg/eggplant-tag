@@ -3820,4 +3820,4 @@ def getRegionNameByCode(countryCode, regionCode):
   if code in _dic:
     return _dic[code.upper()]
   else:
-    return "Not in list"
+    return ""

@@ -23,8 +23,11 @@
 		    &nbsp;&nbsp;<a href="#" onclick="deleteRequest('{{ request.id }}')">delete</a><br>
 			
 			<b>Remote address:</b>&nbsp;{{ request.remoteAddress }} <br>
-			<b>Country:</b>&nbsp;{{ request.country }} <br>
-			<b>Region:</b>&nbsp;{{ request.region }} <br><br>
+			
+			{% if request.country %} <b>Country:</b>&nbsp;{{ request.country }} <br> {% endif %}
+			{% if request.region %} <b>Region:</b>&nbsp;{{ request.region }} <br> {% endif %}
+			{% if request.city %} <b>City:</b>&nbsp;{{ request.city }} <br> {% endif %}
+			<br>
 			
 			{% for header in request.headers %}
 			  <b>{{ header[0] }}</b>:&nbsp;{{ header[1] }}<br>

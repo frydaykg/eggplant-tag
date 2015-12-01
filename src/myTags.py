@@ -21,6 +21,7 @@ class TemplateRequest:
 		self.remoteAddress = request.remoteAddress
 		self.country = request.country
 		self.region = request.region
+		self.city = request.city
 		dic = eval(request.headers)
 		keys = sorted(dic.keys())
 		self.headers = [(x, dic[x]) for x in keys]

@@ -12,15 +12,15 @@
     <br>
     <h1>Requested</h1>
     {% for tagWithRequest in tagsWithRequest %}
-      <div id="{{ tagWithRequest[0].tag }}">
-	    <h3 style="display:inline-block">{{ tagWithRequest[0].tag }}</h3>
-		&nbsp;&nbsp;<a href="#" style="display:inline-block" onclick="deleteTag('{{ tagWithRequest[0].tag }}')">delete</a>
-		&nbsp;&nbsp;<a href="#" style="display:inline-block" onclick="copyText(getTagLink('{{ tagWithRequest[0].tag }}'))">copy tag link</a>
+      <div id="{{ tagWithRequest[0].tag.tag }}">
+	    <h3 style="display:inline-block">{{ tagWithRequest[0].tag.tag }}</h3>
+		&nbsp;&nbsp;<a href="#" style="display:inline-block" onclick="deleteTag('{{ tagWithRequest[0].tag.tag }}')">delete</a>
+		&nbsp;&nbsp;<a href="#" style="display:inline-block" onclick="copyText(getTagLink('{{ tagWithRequest[0].tag.tag }}'))">copy tag link</a>
 		<ul>
 		  {% for request in tagWithRequest %}
-		    <li id='{{ request.id }}'>	
+		    <li id='{{ request.key.id() }}'>	
 		    {{ request.datetime }}
-		    &nbsp;&nbsp;<a href="#" onclick="deleteRequest('{{ request.id }}')">delete</a><br>
+		    &nbsp;&nbsp;<a href="#" onclick="deleteRequest('{{ request.key.id() }}')">delete</a><br>
 			
 			<b>Remote address:</b>&nbsp;{{ request.remoteAddress }} <br>
 			
@@ -30,7 +30,7 @@
 			<br>
 			
 			{% for header in request.headers %}
-			  <b>{{ header[0] }}</b>:&nbsp;{{ header[1] }}<br>
+			  <b>{{ header.key }}</b>:&nbsp;{{ header.value }}<br>
 			{% endfor %}
 			<br></li>
 		  {% endfor %}

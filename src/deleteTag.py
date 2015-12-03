@@ -13,7 +13,7 @@ class DeleteTag(webapp2.RequestHandler):
 			query = Tag.query(ndb.AND(Tag.tag == self.request.query_string, Tag.user == cur_user))
 			if query.iter().has_next():
 				tag = query.iter().next()
-				requestQuery = Request.query(Request.tag == tag)
+				requestQuery = Request.query(Request.tag == tag.tag)
 				while requestQuery.iter().has_next():
 					requestQuery.iter().next().key.delete()
 				tag.key.delete()

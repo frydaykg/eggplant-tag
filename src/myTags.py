@@ -21,7 +21,7 @@ class MyTags(webapp2.RequestHandler):
 			tagsWithRequest = []
 			tagsQuery = Tag.query(Tag.user == cur_user)
 			for q in tagsQuery:
-				requestQuery = Request.query(Request.tag == q)
+				requestQuery = Request.query(Request.tag == q.tag)
 				requests = list(requestQuery.iter())
 				if requests:
 					requests = sorted(requests, key = lambda x: x.datetime)

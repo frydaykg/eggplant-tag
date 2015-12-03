@@ -13,7 +13,7 @@ class Header(ndb.Model):
 	value = ndb.StringProperty(indexed=False)
 
 class Request(ndb.Model):
-	tag = ndb.StructuredProperty(Tag)
+	tag = ndb.StringProperty(indexed=True)
 	datetime = ndb.DateTimeProperty(auto_now_add=True)
 	remoteAddress = ndb.StringProperty(indexed=False)
 	headers = ndb.StructuredProperty(Header, indexed=False, repeated=True)

@@ -17,7 +17,7 @@ class RequestTag(webapp2.RequestHandler):
 		if query.iter().has_next():
 			tag = query.iter().next()
 			request = Request()
-			request.tag = tag
+			request.tag = tag.tag
 			request.headers = [Header(key=key, value=self.request.headers[key]) for key in sorted(self.request.headers.keys())]
 			request.remoteAddress = str(self.request.remote_addr)
 			if 'X-Appengine-Country' in self.request.headers:

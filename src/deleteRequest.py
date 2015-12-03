@@ -12,10 +12,12 @@ class DeleteRequest(webapp2.RequestHandler):
 		cur_user = users.get_current_user()	
 		if cur_user:
 			key = ndb.Key('Request', int(self.request.query_string))
-			query = Request.query(ndb.AND(Request.key == key, Request.tag.user == cur_user))
+			query = Request.query(Request.key == key)			
 			if query.iter().has_next():
 				request = query.iter().next()
-				request.key.delete()
+				queryTags = Tag.query(ndb.AND(Tag.tag == request.tag, Tag.user == cur_user))
+				if queryTags.iter().has_next():
+					request.key.delete()
 			else:
 				self.error(404)
 		else:

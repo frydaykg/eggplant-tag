@@ -1,7 +1,15 @@
 {% autoescape true %}
-<div style="position:absolute; top: 45%;width:100%;text-align:center;">	
-  <input type="text" id="tag" size=45 readonly/>
-  <input type="button" onclick="getTag()" value="Get tag"/>
-  <input type="button" value="Copy" onclick="copyValueOfElement('tag', getTagLink)"/>    
-</div>
+<br>
+<pre>Hello,
+it is service to track emails similar to bananatag.com. Idea of project is to have service for email tracking without need to give access to my email to third-party company.
+<img src='/img/eggplant.png'/>
+By default it designed to host on Google App Engine.
+
+To track your email just add in content the following:
+
+<b>in HTML mode:</b> &lt;img src='link_to_tag'/&gt;
+<b>in editor mode:</b> add image of tag by link(!), not as content
+
+Project on <a href='https://github.com/frydaykg/eggplant-tag'>GitHub</a>
+</pre>
 {% endautoescape %}

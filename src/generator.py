@@ -18,17 +18,14 @@ class MainPage(webapp2.RequestHandler):
 		user = users.get_current_user()
 		if user:
 			self.response.write(JINJA_ENVIRONMENT.get_template('templates/header.html').render({
-			'title': 'Welcome',
+			'title': 'Generate tag',
 			'isLogin': True,
 			'logoutUrl': users.create_logout_url('/')}))
+			self.response.write(JINJA_ENVIRONMENT.get_template('templates/generator.html').render())
+			self.response.write(JINJA_ENVIRONMENT.get_template('templates/footer.html').render())
 		else:
-			self.response.write(JINJA_ENVIRONMENT.get_template('templates/header.html').render({
-			'title': 'Welcome',
-			'isLogin': False,
-			'loginUrl': users.create_login_url('/')}))
-		self.response.write(JINJA_ENVIRONMENT.get_template('templates/main.html').render())
-		self.response.write(JINJA_ENVIRONMENT.get_template('templates/footer.html').render())
+			self.redirect('/')
 
 app = webapp2.WSGIApplication([
-	('/', MainPage),
+	('/generator/', MainPage),
 ], debug=True)

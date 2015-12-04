@@ -20,5 +20,5 @@ class TagGenerator(webapp2.RequestHandler):
 
 
 app = webapp2.WSGIApplication([
-	('/tag/', TagGenerator),
+	('/generateTag', TagGenerator),
 ], debug=True)

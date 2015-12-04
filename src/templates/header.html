@@ -5,11 +5,16 @@
     <script src="/js/tagManager.js"></script>
     <script src="/js/clipboardCopy.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+</style>
   </head>
   <body>
     <div id="menu">
-      <pre><a href="/">Main</a>  <a href="/tags/">My tags</a>
-      </pre>
+    {% if isLogin %}
+      <pre style='float:left;'><a href="/">Main</a>  <a href="/generator/">Generate tag</a>  <a href="/tags/">My tags</a></pre>
+      <pre style='float:right;'><a href="{{ logoutUrl }}">Logout</a>   </pre>    
+    {% else %}
+      <pre style='float:left;'><a href="{{ loginUrl }}">Login</a></pre>
+    {% endif %}
     </div>
     <div id="content">
   {% endautoescape %}

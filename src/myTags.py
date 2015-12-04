@@ -33,12 +33,15 @@ class MyTags(webapp2.RequestHandler):
             'tagsWithoutRequest': tagsWithoutRequest,
             'tagsWithRequest': tagsWithRequest,
             }
-			self.response.write(JINJA_ENVIRONMENT.get_template('templates/header.html').render({'title': 'My tags'}))
+			self.response.write(JINJA_ENVIRONMENT.get_template('templates/header.html').render({
+			'title': 'My tags',
+			'isLogin': True,
+			'logoutUrl': users.create_logout_url('/')}))
 			template = JINJA_ENVIRONMENT.get_template('templates/myTags.html')
 			self.response.write(template.render(template_values))
 			self.response.write(JINJA_ENVIRONMENT.get_template('templates/footer.html').render())
 		else:
-			self.redirect(users.create_login_url(self.request.uri))
+			self.redirect('/')
 
 app = webapp2.WSGIApplication([
 	('/tags/', MyTags),

@@ -9,17 +9,22 @@ handlers:
   static_dir: js
 - url: /css
   static_dir: css
+- url: /img
+  static_dir: img
 
 - url: /deleteRequest
   script: deleteRequest.app
 - url: /deleteTag
   script: deleteTag.app
-- url: /tag/
+- url: /generateTag
   script: tagGenerator.app
-- url: /tags/
-  script: myTags.app
 - url: /request.*
   script: requestTag.app
+
+- url: /generator/
+  script: generator.app
+- url: /tags/
+  script: myTags.app
 - url: /.*
   script: main.app
 

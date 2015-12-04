@@ -10,7 +10,7 @@ function getTag() {
 	      document.getElementById("tag").value = xhttp.responseText;
 	}
 	  }
-	  xhttp.open("GET", "/tag/", true);
+	  xhttp.open("GET", "/generateTag", true);
 	  xhttp.send();
 	}
 	catch (E) {
